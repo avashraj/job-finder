@@ -1,5 +1,6 @@
 import os
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 from dotenv import load_dotenv
 
@@ -10,6 +11,7 @@ SENDER = "onboarding@resend.dev"
 FRESH_HOURS = 4
 RESUME_DIR = "resumes"
 SEEN_PATH = "seen.json"
+SOURCE_TZ = ZoneInfo("America/Los_Angeles")
 
 load_dotenv()
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
@@ -18,7 +20,7 @@ RESEND_API_KEY = os.getenv("RESEND_API_KEY")
 
 def run(now: datetime | None = None) -> int:
     now = now or datetime.now(timezone.utc)
-    today = now.date().isoformat()
+    today = now.astimezone(SOURCE_TZ).date().isoformat()
 
     all_jobs = source.get_jobs()
     print(f"fetched: {len(all_jobs)}")

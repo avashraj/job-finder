@@ -45,6 +45,32 @@ def test_run_filters_dedups_emails_and_records(tmp_path, monkeypatch):
         assert "fresh" in json.load(f)
 
 
+def test_today_filter_uses_pacific_date(tmp_path, monkeypatch):
+    # 2026-07-14 03:00 UTC == 2026-07-13 20:00 Pacific — job dated "2026-07-13" must NOT be excluded
+    now = datetime(2026, 7, 14, 3, 0, 0, tzinfo=timezone.utc)
+    pacific_date = "2026-07-13"
+    seen_path = str(tmp_path / "seen.json")
+    monkeypatch.setattr(M, "SEEN_PATH", seen_path)
+    monkeypatch.setattr(M, "DEEPSEEK_API_KEY", "dk")
+    monkeypatch.setattr(M, "RESEND_API_KEY", "rk")
+
+    jobs = [_job("pacific_job", pacific_date)]
+
+    def fake_posted(url):
+        return now - timedelta(hours=1)
+
+    with patch.object(M.source, "get_jobs", return_value=jobs), \
+         patch.object(M.freshness, "fetch_posted_at", side_effect=fake_posted), \
+         patch.object(M.matcher, "load_resumes", return_value=["resume"]), \
+         patch.object(M.matcher, "keep", return_value=M.matcher.Decision(True, "fit")), \
+         patch.object(M.emailer, "send") as send, \
+         patch.object(M.state, "load_seen", return_value=set()):
+        emailed = M.run(now=now)
+
+    assert emailed == 1, "job with Pacific date should not be filtered out when UTC is already the next day"
+    assert send.called
+
+
 def test_run_skips_email_when_no_matches(tmp_path, monkeypatch):
     now = datetime(2026, 7, 13, 20, 0, 0, tzinfo=timezone.utc)
     monkeypatch.setattr(M, "SEEN_PATH", str(tmp_path / "seen.json"))
