@@ -1,0 +1,47 @@
+{
+  "data": {
+    "table": {
+      "columns": [
+        {"id": "fldMZwgmYAKznRUo6", "name": "Position Title", "type": "multilineText"},
+        {"id": "fldbDjG5x0hw8Uuk8", "name": "Date", "type": "multilineText"},
+        {"id": "fldhbYjhYPgayPoKp", "name": "Apply", "type": "button"},
+        {"id": "fldcOSYUg4vWoPs5A", "name": "Work Model", "type": "select",
+         "typeOptions": {"choices": {"sel3A6LbHGXxWf5zG": {"id": "sel3A6LbHGXxWf5zG", "name": "Onsite"}}}},
+        {"id": "fldiPwR9Nhy5OjxDb", "name": "Location", "type": "multilineText"},
+        {"id": "fldvfYMUzoI9D5ens", "name": "Company", "type": "multilineText"},
+        {"id": "fldf2yoebT7ltpDIp", "name": "Salary", "type": "multilineText"},
+        {"id": "fldjaERUKVKmOGbw2", "name": "Qualifications", "type": "multilineText"}
+      ],
+      "rows": [
+        {
+          "id": "rec1",
+          "createdTime": "2026-07-13T18:57:22.000Z",
+          "cellValuesByColumnId": {
+            "fldMZwgmYAKznRUo6": "Junior Data Engineer",
+            "fldbDjG5x0hw8Uuk8": "2026-07-13",
+            "fldhbYjhYPgayPoKp": {"label": "👉 Apply", "url": "https://jobright.ai/jobs/info/6a550bec268af95237be8d61?utm_source=1100&utm_campaign=Software Engineering"},
+            "fldcOSYUg4vWoPs5A": "sel3A6LbHGXxWf5zG",
+            "fldiPwR9Nhy5OjxDb": "Plano, TX, United States",
+            "fldvfYMUzoI9D5ens": "Tata Consultancy Services",
+            "fldf2yoebT7ltpDIp": "$80,000-$100,000 /yr",
+            "fldjaERUKVKmOGbw2": "ETL, SQL, Python, Snowflake, DBT"
+          }
+        },
+        {
+          "id": "rec2",
+          "createdTime": "2026-07-13T18:57:25.000Z",
+          "cellValuesByColumnId": {
+            "fldMZwgmYAKznRUo6": "AI Agent Engineer",
+            "fldbDjG5x0hw8Uuk8": "2026-07-12",
+            "fldhbYjhYPgayPoKp": {"label": "👉 Apply", "url": "https://jobright.ai/jobs/info/68abc0000000000000000001"},
+            "fldcOSYUg4vWoPs5A": "sel3A6LbHGXxWf5zG",
+            "fldiPwR9Nhy5OjxDb": "New York, NY, United States",
+            "fldvfYMUzoI9D5ens": "Acme AI",
+            "fldf2yoebT7ltpDIp": "$150,000 /yr",
+            "fldjaERUKVKmOGbw2": "LangGraph, Python, RAG, agentic pipelines"
+          }
+        }
+      ]
+    }
+  }
+}
