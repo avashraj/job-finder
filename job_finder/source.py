@@ -17,7 +17,7 @@ AIRTABLE_HEADERS = {
 def discover_swe_embed(html: str) -> tuple[str, str]:
     """Find the /us/swe tile and return (app_id, share_id) from its airtable-link."""
     m = re.search(
-        r'data-job-path="/us/swe"[^>]*airtable-link="https://airtable\.com/embed/(app\w+)/(shr\w+)"',
+        r'data-job-path="/us/swe"[^>]*airtable-link="https://airtable\.com/embed/(app\w+)/(shr\w+)',
         html,
     )
     if not m:
