@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 from job_finder import source, freshness, matcher, emailer, state
 
-RECIPIENT = "avashraj328@outlook.com"
+RECIPIENT = "avashraj328@gmail.com"
 SENDER = "onboarding@resend.dev"
 FRESH_HOURS = 4
 RESUME_DIR = "resumes"
