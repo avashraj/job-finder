@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 
 from job_finder import source, freshness, matcher, emailer, state
 
-RECIPIENT = "avashraj328@gmail.com"
 SENDER = "onboarding@resend.dev"
 FRESH_HOURS = 4
 RESUME_DIR = "resumes"
@@ -16,6 +15,7 @@ SOURCE_TZ = ZoneInfo("America/Los_Angeles")
 load_dotenv()
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+RECIPIENT = os.getenv("RECIPIENT_EMAIL")
 
 
 def run(now: datetime | None = None) -> int:
