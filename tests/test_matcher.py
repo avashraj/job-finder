@@ -16,7 +16,8 @@ def test_load_resumes_reads_markdown(tmp_path):
     (tmp_path / "notes.txt").write_text("ignore me")
     resumes = load_resumes(str(tmp_path))
     assert len(resumes) == 1
-    assert "FastAPI" in resumes[0]
+    assert resumes[0][0] == "general"
+    assert "FastAPI" in resumes[0][1]
 
 
 def test_keep_true_on_positive_verdict():

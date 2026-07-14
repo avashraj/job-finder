@@ -46,14 +46,14 @@ def run(now: datetime | None = None) -> int:
     for j in fresh:
         d = matcher.keep(j, resumes, DEEPSEEK_API_KEY)
         if d.keep:
-            kept.append((j, d.reason))
+            kept.append((j, d.reason, d.resume))
     print(f"kept: {len(kept)}")
 
     if kept:
         html = emailer.build_digest(kept)
         subject = f"{len(kept)} new SWE job match(es) — {today}"
         emailer.send(html, subject, RECIPIENT, SENDER, RESEND_API_KEY)
-        seen |= {j.id for j, _ in kept}
+        seen |= {j.id for j, _, _ in kept}
         state.save_seen(SEEN_PATH, seen)
         print(f"emailed: {len(kept)}")
     else:
