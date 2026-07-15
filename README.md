@@ -12,6 +12,10 @@ uv sync --dev
 cp .env.example .env   # then fill in DEEPSEEK_API_KEY, RESEND_API_KEY, and RECIPIENT_EMAIL
 ```
 
+Add your resumes as `.md` files in the `resumes/` folder (git-ignored, kept
+local). The matcher loads every `*.md` in that folder — one file per resume
+variant, e.g. `resumes/frontend.md`, `resumes/java.md`, `resumes/general.md`.
+
 ## Run
 
 ```bash

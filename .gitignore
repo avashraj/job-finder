@@ -12,3 +12,6 @@ wheels/
 # Secrets & local state
 .env
 seen.json
+
+# Personal resumes (add your own locally — see README)
+resumes/
