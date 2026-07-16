@@ -1,8 +1,28 @@
 import html as _html
+from datetime import datetime, timezone
 
 import requests
 
 RESEND_URL = "https://api.resend.com/emails"
+
+
+def humanize_age(posted_at: datetime | None, now: datetime | None = None) -> str:
+    if posted_at is None:
+        return "posting time unknown"
+    now = now or datetime.now(timezone.utc)
+    seconds = (now - posted_at).total_seconds()
+    if seconds < 0:
+        return "just posted"
+    minutes = int(seconds // 60)
+    if minutes < 1:
+        return "just posted"
+    if minutes < 60:
+        return f"posted {minutes} minute{'s' if minutes != 1 else ''} ago"
+    hours = minutes // 60
+    if hours < 24:
+        return f"posted {hours} hour{'s' if hours != 1 else ''} ago"
+    days = hours // 24
+    return f"posted {days} day{'s' if days != 1 else ''} ago"
 
 
 def build_digest(jobs: list[tuple]) -> str:
@@ -14,6 +34,7 @@ def build_digest(jobs: list[tuple]) -> str:
             f"<br><strong>Resume to use:</strong> {_html.escape(resume)}"
             if resume else ""
         )
+        age = humanize_age(job.posted_at)
         rows.append(
             "<li style='margin-bottom:14px'>"
             f"<a href='{_html.escape(job.jobright_url)}'>"
@@ -21,6 +42,7 @@ def build_digest(jobs: list[tuple]) -> str:
             f" — {_html.escape(job.company)}<br>"
             f"<small>{_html.escape(job.location)} · "
             f"{_html.escape(job.work_model)} · {_html.escape(job.salary)}</small><br>"
+            f"<small>{_html.escape(age)}</small><br>"
             f"<em>{_html.escape(reason)}</em>"
             f"{resume_line}"
             "</li>"
